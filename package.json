@@ -1,0 +1,38 @@
+{
+  "name": "react-native-recycler-list",
+  "title": "React Native Recycler List",
+  "version": "1.0.0",
+  "description": "Memory optimised Native Recycler list for React Native with 100% native performance",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github_account/react-native-recycler-list.git",
+    "baseUrl": "https://github.com/github_account/react-native-recycler-list"
+  },
+  "keywords": [
+    "recycler-list",
+    "recycler-view",
+    "list-view",
+    "react-native-list",
+    "native list",
+    "native recycler list"
+  ],
+  "author": {
+    "name": "Ashutosh Singh",
+    "email": "ashutosh.akss@gmail.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.60.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.5"
+  }
+}

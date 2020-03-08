@@ -1,5 +1,3 @@
-import { NativeModules } from "react-native";
+import { requireNativeComponent } from "react-native";
 
-const { RecyclerList } = NativeModules;
-
-export default RecyclerList;
+module.exports = requireNativeComponent("RecyclerList");

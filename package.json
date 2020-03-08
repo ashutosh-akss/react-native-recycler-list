@@ -1,7 +1,7 @@
 {
   "name": "react-native-recycler-list",
   "title": "React Native Recycler List",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Memory optimised Native Recycler list for React Native with 100% native performance",
   "main": "index.js",
   "scripts": {

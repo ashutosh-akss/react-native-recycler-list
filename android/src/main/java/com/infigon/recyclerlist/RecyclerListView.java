@@ -45,11 +45,16 @@ public class RecyclerListView extends RecyclerView {
                     if (totalItemCount > previousTotal) {
                         loading = false;
                         previousTotal = totalItemCount;
+                        WritableMap map = Arguments.createMap();
+                        map.putInt("previousLoaded", previousTotal);
+                        sendEvent(Constants.ON_SCROLL_THRESHOLD,map);
                     }
                 }
                 if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
                     // End has been reached
-                    Log.d("MYTAG", "end called");
+                    WritableMap map = Arguments.createMap();
+                    map.putInt("end", totalItemCount);
+                    sendEvent(Constants.ON_END_REACH,map);
                     loading = true;
                 }
             }
@@ -64,9 +69,9 @@ public class RecyclerListView extends RecyclerView {
         this.visibleThreshold = value;
     }
 
-    public void sendEvent(View view, String eventName, WritableMap map) {
+    public void sendEvent( String eventName, WritableMap map) {
         SwipeRefreshView swipeRefreshView = (SwipeRefreshView) this.getParent();
-        swipeRefreshView.sendEvent(view,eventName,map);
+        swipeRefreshView.sendEvent(eventName,map);
     }
 }
 
@@ -101,7 +106,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             Log.d("MYTAG", "Click received " + getAdapterPosition() + " view id : " + view);
             WritableMap map = Arguments.createMap();
             map.putInt("position", getAdapterPosition());
-            mRecyclerView.sendEvent(view,"onClick",map);
+            mRecyclerView.sendEvent(Constants.ON_CLICK,map);
         }
 
         @Override
@@ -109,7 +114,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             Log.d("MYTAG", "Long Click received " + getAdapterPosition() + " view id : " + view.getId());
             WritableMap map = Arguments.createMap();
             map.putInt("position", getAdapterPosition());
-            mRecyclerView.sendEvent(view,"onLongClick",map);
+            mRecyclerView.sendEvent(Constants.ON_LONG_CLICK,map);
             return false;
         }
     }

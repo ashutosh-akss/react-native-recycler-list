@@ -1,6 +1,6 @@
 # react-native-recycler-list
 
-## Warning : This module is in POC PHASE and shoudl not be used in procution , I will keep you posted when this is production ready.
+## Warning : This module is in POC PHASE and should not be used in production
 
 ## Getting started
 

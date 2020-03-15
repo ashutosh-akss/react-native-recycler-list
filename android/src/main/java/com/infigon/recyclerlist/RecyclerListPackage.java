@@ -18,6 +18,6 @@ public class RecyclerListPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Arrays.<ViewManager> asList(new ListViewManager());
+        return Arrays.<ViewManager> asList(new SwipeViewManager());
     }
 }

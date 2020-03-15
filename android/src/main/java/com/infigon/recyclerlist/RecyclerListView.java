@@ -22,7 +22,6 @@ import java.util.HashMap;
 
 public class RecyclerListView extends RecyclerView {
     ReactContext reactContext;
-    private int osdPageNo = 0;
     private int previousTotal = 0;
     private boolean loading = true;
     private int visibleThreshold = 5;
@@ -58,6 +57,10 @@ public class RecyclerListView extends RecyclerView {
 
     public void setData(ReadableArray adapterData) {
         this.setAdapter(new MyAdapter(adapterData));
+    }
+
+    public void setVisibleThreshold(Integer value){
+        this.visibleThreshold = value;
     }
 }
 
@@ -124,20 +127,9 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     // Create new views (invoked by the layout manager)
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // TextView tv = new TextView(parent.getContext());
-        // tv.setLayoutParams(
-        // new LinearLayout.LayoutParams(
-        // ViewGroup.LayoutParams.MATCH_PARENT,
-        // ViewGroup.LayoutParams.WRAP_CONTENT
-        // )
-        // );
-        //
-        // return new MyViewHolder(tv);
         CardView layout = (CardView) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_row, viewGroup,
                 false);
-
         MyViewHolder vh = new MyViewHolder(layout);
-        // context = viewGroup.getContext();
         return vh;
 
     }

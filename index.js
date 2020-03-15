@@ -1,3 +1,3 @@
 import { requireNativeComponent } from "react-native";
 
-module.exports = requireNativeComponent("RecyclerList");
+module.exports = requireNativeComponent("RecyclerView");

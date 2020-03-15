@@ -13,9 +13,9 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 
 import java.util.Map;
 
-public class ListViewManager extends SimpleViewManager<RecyclerListView> {
+public class SwipeViewManager extends SimpleViewManager<SwipeRefreshView> {
 
-    public static final String REACT_CLASS = "RecyclerList";
+    public static final String REACT_CLASS = "RecyclerView";
 
     @NonNull
     @Override
@@ -25,17 +25,35 @@ public class ListViewManager extends SimpleViewManager<RecyclerListView> {
 
     @NonNull
     @Override
-    protected RecyclerListView createViewInstance(@NonNull ThemedReactContext reactContext) {
-        return new RecyclerListView(reactContext );
+    protected SwipeRefreshView createViewInstance(@NonNull ThemedReactContext reactContext) {
+        return new SwipeRefreshView(reactContext);
     }
 
     @ReactProp(name = "src")
-    public void setData(RecyclerListView view, @Nullable ReadableArray sources) {
+    public void setData(SwipeRefreshView view, @Nullable ReadableArray sources) {
         Log.d("MYTAG","About to print array list content from js");
         for(int i=0;i<sources.size();i++){
             Log.d("MYTAG",sources.getMap(i).getString("name"));
         }
         view.setData(sources);
+    }
+
+    @ReactProp(name = "pullToRefresh", defaultBoolean = false)
+    public void pullToRefresh(SwipeRefreshView view, @Nullable Boolean param) {
+        Log.d("MYTAG","PULL TO REFRESH VALUE IS : "+param);
+        view.setPullToRefresh(param);
+    }
+
+    @ReactProp(name = "visibleThreshold", defaultInt = 5)
+    public void pullToRefresh(SwipeRefreshView view, @Nullable Integer param) {
+        Log.d("MYTAG","VISIBLE THRESHOLD VALUE IS : "+param);
+        view.setVisibleThreshold(param);
+    }
+
+    @ReactProp(name = "infiniteScroll", defaultBoolean = false)
+    public void infiniteScroll(SwipeRefreshView view, @Nullable Boolean param) {
+        Log.d("MYTAG","INFINITE SCROLL VALUE IS : "+param);
+        view.setInfiniteScroll(param);
     }
 
     @Nullable
@@ -54,9 +72,11 @@ public class ListViewManager extends SimpleViewManager<RecyclerListView> {
                 MapBuilder.of("registrationName", "onLongClick"),
                 "onRefresh",
                 MapBuilder.of("registrationName", "onRefresh"),
+                "onScrollThreshold",
+                MapBuilder.of("registrationName", "onScrollThreshold"),
                 "onEndReach",
                 MapBuilder.of("registrationName", "onEndReach")
-                );
+        );
 
     }
 }

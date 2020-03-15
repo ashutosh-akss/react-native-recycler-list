@@ -56,6 +56,12 @@ public class SwipeViewManager extends SimpleViewManager<SwipeRefreshView> {
         view.setInfiniteScroll(param);
     }
 
+    @ReactProp(name = "refreshing", defaultBoolean = false)
+    public void setRefreshing(SwipeRefreshView view, @Nullable Boolean param) {
+        Log.d("MYTAG","INFINITE SCROLL VALUE IS : "+param);
+        view.setRefreshing(param);
+    }
+
     @Nullable
     @Override
     public Map<String, Object> getExportedCustomBubblingEventTypeConstants() {

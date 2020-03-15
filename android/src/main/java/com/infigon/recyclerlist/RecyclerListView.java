@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RecyclerListView extends RecyclerView {
-    ReactContext reactContext;
+    private ReactContext reactContext;
     private int previousTotal = 0;
     private boolean loading = true;
     private int visibleThreshold = 5;
@@ -29,6 +29,7 @@ public class RecyclerListView extends RecyclerView {
 
     public RecyclerListView(@NonNull ReactContext context) {
         super(context);
+        reactContext = context;
         this.setLayoutManager(new LinearLayoutManager(context));
 
         this.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -62,6 +63,11 @@ public class RecyclerListView extends RecyclerView {
     public void setVisibleThreshold(Integer value){
         this.visibleThreshold = value;
     }
+
+    public void sendEvent(View view, String eventName, WritableMap map) {
+        SwipeRefreshView swipeRefreshView = (SwipeRefreshView) this.getParent();
+        swipeRefreshView.sendEvent(view,eventName,map);
+    }
 }
 
 class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
@@ -90,21 +96,12 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         }
 
-        public void onReceiveNativeEvent(Integer adapterPosition, View view) {
-            WritableMap event = Arguments.createMap();
-            event.putString("message", "MyMessage");
-            event.putInt("position", adapterPosition);
-            ReactContext reactContext = (ReactContext) view.getContext();
-            reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(mRecyclerView.getId(), "myCallback", event);
-        }
-
         @Override
         public void onClick(View view) {
             Log.d("MYTAG", "Click received " + getAdapterPosition() + " view id : " + view);
             WritableMap map = Arguments.createMap();
             map.putInt("position", getAdapterPosition());
-            final ReactContext context = (ReactContext) view.getContext();
-            context.getJSModule(RCTEventEmitter.class).receiveEvent(mRecyclerView.getId(), "onClick", map);
+            mRecyclerView.sendEvent(view,"onClick",map);
         }
 
         @Override
@@ -112,9 +109,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             Log.d("MYTAG", "Long Click received " + getAdapterPosition() + " view id : " + view.getId());
             WritableMap map = Arguments.createMap();
             map.putInt("position", getAdapterPosition());
-            final ReactContext context = (ReactContext) view.getContext();
-            context.getJSModule(RCTEventEmitter.class).receiveEvent(mRecyclerView.getId(), "onLongClick", map);
-
+            mRecyclerView.sendEvent(view,"onLongClick",map);
             return false;
         }
     }

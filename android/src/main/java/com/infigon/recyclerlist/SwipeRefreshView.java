@@ -58,4 +58,8 @@ public class SwipeRefreshView extends SwipeRefreshLayout {
     public void setRefreshing(Boolean value){
         this.setRefreshing(value);
     }
+
+    public void sendEvent(View view, String eventName, WritableMap map) {
+        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), eventName, map);
+    }
 }

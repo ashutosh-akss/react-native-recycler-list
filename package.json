@@ -9,8 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-recycler-list.git",
-    "baseUrl": "https://github.com/github_account/react-native-recycler-list"
+    "url": "git+https://github.com/ashutosh-akss/react-native-recycler-list.git",
+    "baseUrl": "https://github.com/ashutosh-akss/react-native-recycler-list"
   },
   "keywords": [
     "recycler-list",

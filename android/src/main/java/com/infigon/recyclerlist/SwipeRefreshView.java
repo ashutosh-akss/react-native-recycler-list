@@ -20,14 +20,12 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 public class SwipeRefreshView extends SwipeRefreshLayout {
     private ReactContext reactContext;
     private RecyclerListView recyclerListView;
-    private Boolean pullToRefresh, infiniteScroll;
+    private Boolean infiniteScroll;
 
     public SwipeRefreshView(@NonNull ReactContext context) {
         super(context);
         reactContext = context;
         recyclerListView = new RecyclerListView(context);
-        this.setEnabled(pullToRefresh);
-
         this.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
 
             @Override
@@ -50,7 +48,7 @@ public class SwipeRefreshView extends SwipeRefreshLayout {
     }
 
     public  void setPullToRefresh(Boolean value){
-        this.pullToRefresh = value;
+        this.setEnabled(value);
     }
 
     public  void setInfiniteScroll(Boolean value){
